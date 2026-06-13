@@ -14,10 +14,29 @@ public class Task {
     private String title;
     private String courseName;
     private LocalDate dueDate;
-    private String priority;
-    private String status;
+    private String description;
+
+    @Enumerated(EnumType.STRING)
+    private Priority priority;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Task() {}
+
+    public Task(String title, String courseName, LocalDate dueDate,
+                String description, Priority priority, Status status) {
+        this.title = title;
+        this.courseName = courseName;
+        this.dueDate = dueDate;
+        this.description = description;
+        this.priority = priority;
+        this.status = status;
+    }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -31,9 +50,15 @@ public class Task {
     public LocalDate getDueDate() { return dueDate; }
     public void setDueDate(LocalDate dueDate) { this.dueDate = dueDate; }
 
-    public String getPriority() { return priority; }
-    public void setPriority(String priority) { this.priority = priority; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public Priority getPriority() { return priority; }
+    public void setPriority(Priority priority) { this.priority = priority; }
+
+    public Status getStatus() { return status; }
+    public void setStatus(Status status) { this.status = status; }
+
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 }
